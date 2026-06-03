@@ -1,0 +1,55 @@
+# ROCm Profiler — Tracing Configuration
+# High-frequency kernel tracing with rocprof
+
+collection:
+  interval_ms: 50
+  metrics:
+    - gpu_use_percent
+    - mem_use_percent
+    - mem_used
+    - temperature
+    - power
+    - clock_speed
+    - occupancy
+    - wavefronts
+    - vram_bytes
+  tools:
+    rocm_smi: true
+    rocprof: true
+  rocprof_options:
+    trace_kernel_names: true
+    trace_dispatch_times: true
+    collect_stats: true
+    collect_hsa_trace: true
+    buffer_size_mb: 256
+
+analysis:
+  bottleneck_detection: true
+  roofline_analysis: true
+  occupancy_analysis: true
+  memory_analysis: true
+  kernel_level_analysis: true
+  cu_analysis: true
+  threshold_percentile: 95
+
+visualization:
+  format: html
+  theme: dark
+  charts:
+    - utilization_timeline
+    - kernel_flamegraph
+    - memory_bandwidth
+    - occupancy_scatter
+    - cu_heatmap
+    - roofline_plot
+    - bottleneck_summary
+  refresh_interval_s: 0
+
+export:
+  formats:
+    - csv
+    - json
+    - markdown
+  include_metadata: true
+  include_kernel_details: true
+  include_trace: true

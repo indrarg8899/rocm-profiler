@@ -1,0 +1,44 @@
+# ROCm Profiler — Default Configuration
+# Balanced profiling for general GPU workloads
+
+collection:
+  interval_ms: 100
+  metrics:
+    - gpu_use_percent
+    - mem_use_percent
+    - mem_used
+    - mem_total
+    - temperature
+    - power
+    - fan_speed
+    - clock_speed
+    - voltage
+  tools:
+    rocm_smi: true
+    rocprof: false
+
+analysis:
+  bottleneck_detection: true
+  roofline_analysis: false
+  occupancy_analysis: true
+  memory_analysis: true
+  threshold_percentile: 90
+
+visualization:
+  format: html
+  theme: dark
+  charts:
+    - utilization_timeline
+    - power_timeline
+    - memory_usage
+    - occupancy_scatter
+    - bottleneck_summary
+  refresh_interval_s: 0
+
+export:
+  formats:
+    - csv
+    - json
+    - markdown
+  include_metadata: true
+  include_kernel_details: true
